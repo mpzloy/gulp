@@ -1,0 +1,29 @@
+{
+  "name": "vadim_x",
+  "homepage": "https://github.com/mpzloy/mpzloy.github.io",
+  "authors": [
+    "mpzloy <mpzloy@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "owl.carousel": "^2.2.0",
+    "jquery": "^3.1.0",
+    "photoswipe": "^4.1.1",
+    "svg4everybody": "^2.1.0"
+  },
+  "overrides": {
+    "jquery": {
+      "main": "dist/jquery.min.js"
+    }
+  }
+}
