@@ -12,7 +12,7 @@ smartgrid('./src/less', {
             fields: "20px"
         },
         md: {
-            width: "992px",
+            width: "1024px",
             fields: "20px"
         },
         sm: {
