@@ -11,13 +11,15 @@
   "devDependencies": {
     "@babel/core": "^7.1.6",
     "browser-sync": "^2.18.7",
+    "del": "^3.0.0",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "latest",
     "gulp-babel": "^8.0.0-beta.2",
-    "gulp-clean-css": "^3.8.0",
+    "gulp-clean-css": "^4.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-flatten": "^0.4.0",
     "gulp-group-css-media-queries": "^1.2.0",
+    "gulp-htmlmin": "^5.0.1",
     "gulp-imagemin": "^5.0.3",
     "gulp-less": "latest",
     "gulp-rename": "latest",
@@ -29,10 +31,10 @@
     "gulp-svgmin": "^2.1.0",
     "gulp-uglify": "^3.0.0",
     "main-bower-files": "^2.13.1",
+    "npm-check-updates": "^2.15.0",
     "smart-grid": "latest"
   },
   "dependencies": {
-    "normalize.css": "^8.0.0",
-    "npm-check-updates": "^2.14.1"
+    "normalize.css": "^8.0.0"
   }
 }

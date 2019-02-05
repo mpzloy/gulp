@@ -3,32 +3,32 @@
 @import url('https://fonts.googleapis.com/css?family=Playfair+Display');
 
 /*colors*/
-@color: red;
+$color: red;
 
 /*placeholder*/
-@placeholderColor: #cecece;
+$placeholderColor: #cecece;
 input[type="text"]::-webkit-input-placeholder,
 input[type="email"]::-webkit-input-placeholder,
 input[type="number"]::-webkit-input-placeholder,
 input[type="password"]::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder{color:@placeholderColor}
+textarea::-webkit-input-placeholder{color:$placeholderColor}
 input[type="text"]:-moz-placeholder,
 input[type="email"]:-moz-placeholder,
 input[type="number"]:-moz-placeholder,
 input[type="password"]:-moz-placeholder,
-textarea:-moz-placeholder{color:@placeholderColor}
+textarea:-moz-placeholder{color:$placeholderColor}
 input[type="text"]::-moz-placeholder,
 input[type="email"]::-moz-placeholder,
 input[type="number"]::-moz-placeholder,
 input[type="password"]::-moz-placeholder,
-textarea::-moz-placeholder{color:@placeholderColor}
+textarea::-moz-placeholder{color:$placeholderColor}
 input[type="text"]:-ms-input-placeholder,
 input[type="email"]:-ms-input-placeholder,
 input[type="number"]:-ms-input-placeholder,
 input[type="password"]:-ms-input-placeholder,
-textarea:-ms-input-placeholder{color:@placeholderColor}
+textarea:-ms-input-placeholder{color:$placeholderColor}
 
 /* em */
-.fz(@value){
-  font-size: @value / 16 * 1rem;
+@mixin fz($value) {
+  font-size: $value / 16 * 1rem;
 }
