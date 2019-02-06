@@ -16,7 +16,7 @@ const gulp = require('gulp'),
     imagemin = require('gulp-imagemin'),
     svgmin = require('gulp-svgmin'),
     svgSimbols = require('gulp-svg-symbols'),
-    babel = require("@babel/core"),
+    babel = require("gulp-babel"),
     uglify = require('gulp-uglify'),
     del = require('del'),
     htmlmin = require('gulp-htmlmin'),
@@ -39,7 +39,7 @@ let config = {
         html: './src/*.html',
         css: './src/css/*.css',
         less: './src/less/style.less',
-        scss: './src/sass/style.sass',
+        scss: './src/sass/style.scss',
         js: './src/js/*.js',
         libs: './src/libs',
         svg: './src/images/img/svg/*.svg',
@@ -50,7 +50,7 @@ let config = {
     watch: {
         html: './src/**/*.html',
         less: './src/less/**/*.less',
-        scss: './src/sass/**/*.less',
+        scss: './src/sass/**/*.scss',
         js: './src/js/**/*.js',
         img: './src/img/**/*.*',//todo попробовать доьавить watcher
         fonts: './src/fonts/**/*.*'//todo попробовать доьавить watcher
@@ -109,11 +109,11 @@ let config = {
 // SERVER
 gulp.task('server', reload => {
     browserSync.init({
-        server: true,
+        server: true,//if proxy comment this option
         // tunnel: "test",
         browser: "chrome",
-        // startPath: '/build',
-        proxy: "http://gtracer:9200/site/",
+        startPath: '/build',
+        // proxy: "http://gtracer:9200/site/",
         // port: 2222,
         notify: false,
         open: false
@@ -129,13 +129,13 @@ gulp.task('html', () => {
     return gulp.src(config.src.html)//'./src/*.html'
         .pipe(rigger())
         // .pipe(rename('index.html'))
-        .pipe(htmlmin({ collapseWhitespace: true }))
+        .pipe(htmlmin({collapseWhitespace: true}))//todo проверить работу
         .pipe(gulp.dest(config.build.html))//'./build/'
 });
 
 //LESS
 gulp.task('less', () => {
-    return gulp.src([config.src.less])//'./src/less/style.less'
+    return gulp.src(config.src.less)//'./src/less/style.less'
         .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(gcmq())
@@ -237,7 +237,8 @@ gulp.task('img', () => {
         .pipe(imagemin({
             progressive: true,
             // svgoPlugins: [{removeViewBox: false}],
-            use: [pngquant()],
+            optimizationLevel: 5,
+            // use: [pngquant()],
             interlaced: true
         }))
         .pipe(gulp.dest(config.build.img))//'./build/images'
@@ -285,16 +286,16 @@ gulp.task('fonts', () => {
 
 //WATCH
 gulp.task('watchLess', () => {
-    gulp.watch(config.src.less.watch, gulp.series('less'));//'./src/less/*.less'
-    gulp.watch(config.src.html.watch, gulp.series('html'));//'./src/*.html'
+    gulp.watch(config.watch.less, gulp.series('less'));//'./src/less/*.less'
+    gulp.watch(config.watch.html, gulp.series('html'));//'./src/*.html'
     gulp.watch(config.build.html).on('change', browserSync.reload);//'./build/*.html'
 });
 
 //WATCH SASS
-gulp.task('watchSass', function () {
-    gulp.watch(config.src.scss.watch, gulp.series('scss'));//'./src/sass/*.scss'
-    gulp.watch(config.src.html.watch, gulp.series('html'));
-    gulp.watch(config.build.html.src).on('change', browserSync.reload);
+gulp.task('watchSass', () => {
+    gulp.watch(config.watch.scss, gulp.series('scss'));//'./src/sass/*.scss'
+    gulp.watch(config.watch.html, gulp.series('html'));
+    gulp.watch(config.build.html).on('change', browserSync.reload);
 });
 
 //WATCH BUILD
