@@ -206,7 +206,7 @@ gulp.task('libs', () => {
                     "main": "dist/svg4everybody.min.js"
                 },
                 "owl.carousel": {
-                    "main": "dist/owl.carousel.min.js"
+                    "main": ["dist/owl.carousel.min.js" ,"dist/assets/owl.carousel.min.css"]
                 }
             }
         }
