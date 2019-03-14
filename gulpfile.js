@@ -30,8 +30,8 @@ let config = {
         css: './build/css',
         js: './build/js/',
         libs: './build/libs',
-        svg: './build/images/svg',
-        svgSymbols: './build/images/svg/icons',
+        svg: './build/svg',
+        svgSymbols: './build/svg/icons',
         img: './build/images',
         fonts: './build/fonts/'
     },
@@ -42,8 +42,8 @@ let config = {
         scss: './src/sass/style.scss',
         js: './src/js/*.js',
         libs: './src/libs',
-        svg: './src/images/img/svg/*.svg',
-        svgSymbols: './src/images/img/svg/icons/*.svg',
+        svg: './src/svg/*.svg',
+        svgSymbols: './src/svg/icons/*.svg',
         img: './src/images/**/*.{jpg,png,gif}',
         fonts: './src/fonts/**/*.*'
     },
@@ -229,11 +229,7 @@ gulp.task('js', () => {
 
 //IMG
 gulp.task('img', () => {
-    return gulp.src(config.src.img, {base: config.src})//'./src/img/**/*.{jpg,png,gif}', './src/images/**/*.{jpg,png,gif}' | "./src"
-    // .pipe(smushit({
-    //     verbose: true
-    // }))
-    // .pipe(imagemin())
+    return gulp.src(config.src.img, {base: config.src.base}) //'./src/images/**/*.{jpg,png,gif}', {base: "./src"}
         .pipe(imagemin({
             progressive: true,
             // svgoPlugins: [{removeViewBox: false}],
