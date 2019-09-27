@@ -1,4 +1,4 @@
-    "use strict";
+"use strict";
 
 const gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
@@ -201,8 +201,7 @@ gulp.task('minCss', () => {
 
 //LIBS
 gulp.task('libs', () => {
-    return gulp.src(mainBowerFile(
-        {
+    return gulp.src(mainBowerFile({
             "overrides": {
                 "jquery": {
                     "main": "dist/jquery.min.js"
@@ -211,12 +210,16 @@ gulp.task('libs', () => {
                     "main": "dist/svg4everybody.min.js"
                 },
                 "owl.carousel": {
-                    "main": ["dist/owl.carousel.min.js" ,"dist/assets/owl.carousel.min.css"]
+                    "main": ["dist/owl.carousel.min.js", "dist/assets/owl.carousel.min.css"]
                 }
             }
-        }
-    ), {base: config.src.libs})
-        .pipe(flatten({includeParents: 1}))
+        }),
+        {
+            base: config.src.libs
+        })
+        .pipe(flatten({
+            includeParents: 1
+        }))
         .pipe(gulp.dest(config.build.libs))
 });
 
@@ -224,8 +227,8 @@ gulp.task('libs', () => {
 gulp.task('js', () => {
     return gulp.src(config.src.js)
         .pipe(sourcemaps.init())
+        .pipe(rigger())//=
         .pipe(babel({presets: ['env']}))
-        .pipe(concat('main.js'))
         .pipe(uglify())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(config.build.js))
@@ -271,7 +274,9 @@ gulp.task('svgSymbols', () => {
             },
             templates: [
                 'default-svg', 'default-css', 'default-demo'
-            ]
+            ],
+            collapseGroups: true,
+            removeEmptyContainers: true
         }))
         .pipe(gulp.dest(config.build.svgSymbols))
 });
@@ -303,7 +308,7 @@ gulp.task('buildSass', gulp.parallel('watchSass', 'server'));
 
 
 //WATCH OpenCart
-gulp.task('ocWatch', () =>{
+gulp.task('ocWatch', () => {
     gulp.watch('./site/**/*.tpl').on('change', browserSync.reload);
     gulp.watch('./site/**/*.php').on('change', browserSync.reload);
 });
