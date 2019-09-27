@@ -1,4 +1,4 @@
-"use strict";
+    "use strict";
 
 const gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
@@ -52,8 +52,8 @@ let config = {
         less: './src/less/**/*.less',
         scss: './src/sass/**/*.scss',
         js: './src/js/**/*.js',
-        img: './src/img/**/*.*',//todo попробовать доьавить watcher
-        fonts: './src/fonts/**/*.*'//todo попробовать доьавить watcher
+        img: './src/img/**/*.*',
+        fonts: './src/fonts/**/*.*'
     },
 };
 
@@ -126,38 +126,37 @@ gulp.task('clean', () => del('build'));
 
 //HTML
 gulp.task('html', () => {
-    return gulp.src(config.src.html)//'./src/*.html'
+    return gulp.src(config.src.html)
         .pipe(rigger())
-        // .pipe(rename('index.html'))
-        .pipe(htmlmin({collapseWhitespace: true}))//todo проверить работу
-        .pipe(gulp.dest(config.build.html))//'./build/'
+        // .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest(config.build.html))
 });
 
 //LESS
 gulp.task('less', () => {
-    return gulp.src(config.src.less)//'./src/less/style.less'
+    return gulp.src(config.src.less)
         .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(gcmq())
         .pipe(autoprefixer({
-            browsers: ['last 10 versions'],// > 0.1%
+            overrideBrowserslist: ['last 10 versions'],
             cascade: false
         }))
         .pipe(sourcemaps.write())
         .pipe(concat("style.css"))
-        .pipe(gulp.dest(config.build.css))//'./build/css/'
+        .pipe(gulp.dest(config.build.css))
         .pipe(cleanCSS({
             level: 2
         }))
         .pipe(sourcemaps.write())
         .pipe(rename({suffix: '.min', prefix: ''}))
-        .pipe(gulp.dest(config.build.css))//'./build/css/'
+        .pipe(gulp.dest(config.build.css))
         .pipe(browserSync.stream());
 });
 
 //SASS
 gulp.task('scss', () => {
-    return gulp.src(config.src.scss)//'./src/sass/style.scss'
+    return gulp.src(config.src.scss)
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(gcmq())
@@ -167,31 +166,37 @@ gulp.task('scss', () => {
         }))
         .pipe(sourcemaps.write())
         .pipe(concat("style.css"))
-        .pipe(gulp.dest(config.build.css))//'./build/css/'
+        .pipe(gulp.dest(config.build.css))
         .pipe(cleanCSS({
             level: 2
         }))
         .pipe(sourcemaps.write())
-        .pipe(rename({suffix: '.min', prefix: ''}))
-        .pipe(gulp.dest(config.build.css))//'./build/css/'
+        .pipe(rename({
+            suffix: '.min',
+            prefix: ''
+        }))
+        .pipe(gulp.dest(config.build.css))
         .pipe(browserSync.stream());
 });
 
 //MIN CSS
 gulp.task('minCss', () => {
-    return gulp.src([config.src.css])//'./src/css/style.css'
+    return gulp.src([config.src.css])
         .pipe(gcmq())
         .pipe(autoprefixer({
-            browsers: ['last 10 versions'],// > 0.1%
+            browsers: ['last 10 versions'],
             cascade: false
         }))
         .pipe(concat("style.css"))
-        .pipe(gulp.dest(config.build.css))//'./build/css/'
+        .pipe(gulp.dest(config.build.css))
         .pipe(cleanCSS({
             level: 2
         }))
-        .pipe(rename({suffix: '.min', prefix: ''}))
-        .pipe(gulp.dest(config.build.css))//'./build/css/'
+        .pipe(rename({
+            suffix: '.min',
+            prefix: ''
+        }))
+        .pipe(gulp.dest(config.build.css))
 });
 
 //LIBS
@@ -210,51 +215,49 @@ gulp.task('libs', () => {
                 }
             }
         }
-    ), {base: config.src.libs})//./src/libs
+    ), {base: config.src.libs})
         .pipe(flatten({includeParents: 1}))
-        .pipe(gulp.dest(config.build.libs))//'./build/libs'
+        .pipe(gulp.dest(config.build.libs))
 });
 
 //JS
 gulp.task('js', () => {
-    return gulp.src(config.src.js)//'./src/js/*.js'
+    return gulp.src(config.src.js)
         .pipe(sourcemaps.init())
         .pipe(babel({presets: ['env']}))
         .pipe(concat('main.js'))
         .pipe(uglify())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(config.build.js))//'./build/libs'
+        .pipe(gulp.dest(config.build.js))
         .pipe(browserSync.stream())
 });
 
 //IMG
 gulp.task('img', () => {
-    return gulp.src(config.src.img, {base: config.src.base}) //'./src/images/**/*.{jpg,png,gif}', {base: "./src"}
+    return gulp.src(config.src.img, {base: config.src.base})
         .pipe(imagemin({
             progressive: true,
-            // svgoPlugins: [{removeViewBox: false}],
             optimizationLevel: 5,
-            // use: [pngquant()],
             interlaced: true
         }))
-        .pipe(gulp.dest(config.build.img))//'./build/images'
+        .pipe(gulp.dest(config.build.img))
 });
 
 //SVG
 gulp.task('svg', () => {
-    return gulp.src(config.src.svg, {base: 'src'})//'./src/images/img/svg/*.svg'
+    return gulp.src(config.src.svg, {base: 'src'})
         .pipe(svgmin({
             plugins: [
                 {removeEditorsNSData: true},
                 {removeTitle: true}
             ]
         }))
-        .pipe(gulp.dest(config.build.svg))//'./build/images/svg'
+        .pipe(gulp.dest(config.build.svg))
 });
 
 //SVG SYMBOLS
 gulp.task('svgSymbols', () => {
-    return gulp.src(config.src.svgSymbols)//'./src/img/svg/icons/*.svg'
+    return gulp.src(config.src.svgSymbols)
         .pipe(svgmin({
             plugins: [
                 {removeEditorsNSData: true},
@@ -270,26 +273,26 @@ gulp.task('svgSymbols', () => {
                 'default-svg', 'default-css', 'default-demo'
             ]
         }))
-        .pipe(gulp.dest(config.build.svgSymbols))//'./build/img/svg'
+        .pipe(gulp.dest(config.build.svgSymbols))
 });
 
 //FONTS
 gulp.task('fonts', () => {
-    return gulp.src(config.src.fonts)//'./src/fonts/*.*'
+    return gulp.src(config.src.fonts)
         .pipe(rigger())
-        .pipe(gulp.dest(config.build.fonts))//'./build/fonts'
+        .pipe(gulp.dest(config.build.fonts))
 });
 
 //WATCH
 gulp.task('watchLess', () => {
-    gulp.watch(config.watch.less, gulp.series('less'));//'./src/less/*.less'
-    gulp.watch(config.watch.html, gulp.series('html'));//'./src/*.html'
-    gulp.watch(config.build.html).on('change', browserSync.reload);//'./build/*.html'
+    gulp.watch(config.watch.less, gulp.series('less'));
+    gulp.watch(config.watch.html, gulp.series('html'));
+    gulp.watch(config.build.html).on('change', browserSync.reload);
 });
 
 //WATCH SASS
 gulp.task('watchSass', () => {
-    gulp.watch(config.watch.scss, gulp.series('scss'));//'./src/sass/*.scss'
+    gulp.watch(config.watch.scss, gulp.series('scss'));
     gulp.watch(config.watch.html, gulp.series('html'));
     gulp.watch(config.build.html).on('change', browserSync.reload);
 });
