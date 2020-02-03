@@ -306,10 +306,3 @@ gulp.task('watchSass', () => {
 //WATCH BUILD
 gulp.task('buildLess', gulp.parallel('watchLess', 'server'));
 gulp.task('buildSass', gulp.parallel('watchSass', 'server'));
-
-
-//WATCH OpenCart
-gulp.task('ocWatch', () => {
-    gulp.watch('./site/**/*.tpl').on('change', browserSync.reload);
-    gulp.watch('./site/**/*.php').on('change', browserSync.reload);
-});
