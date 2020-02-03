@@ -139,7 +139,6 @@ gulp.task('less', () => {
         .pipe(less())
         .pipe(gcmq())
         .pipe(autoprefixer({
-            overrideBrowserslist: ['last 10 versions'],
             cascade: false
         }))
         .pipe(sourcemaps.write())
@@ -151,7 +150,7 @@ gulp.task('less', () => {
         .pipe(sourcemaps.write())
         .pipe(rename({suffix: '.min', prefix: ''}))
         .pipe(gulp.dest(config.build.css))
-        .pipe(browserSync.stream());
+        .pipe(browserSync.stream())
 });
 
 //SASS
@@ -161,7 +160,6 @@ gulp.task('scss', () => {
         .pipe(sass().on('error', sass.logError))
         .pipe(gcmq())
         .pipe(autoprefixer({
-            browsers: ['last 10 versions'],
             cascade: false
         }))
         .pipe(sourcemaps.write())
@@ -176,7 +174,7 @@ gulp.task('scss', () => {
             prefix: ''
         }))
         .pipe(gulp.dest(config.build.css))
-        .pipe(browserSync.stream());
+        .pipe(browserSync.stream())
 });
 
 //MIN CSS
@@ -198,6 +196,9 @@ gulp.task('minCss', () => {
         }))
         .pipe(gulp.dest(config.build.css))
 });
+
+
+
 
 //LIBS
 gulp.task('libs', () => {

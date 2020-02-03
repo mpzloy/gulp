@@ -9,8 +9,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.6.0",
-    "@babel/preset-env": "^7.6.0",
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "browser-sync": "^2.26.7",
@@ -23,7 +23,7 @@
     "gulp-flatten": "^0.4.0",
     "gulp-group-css-media-queries": "^1.2.2",
     "gulp-htmlmin": "^5.0.1",
-    "gulp-imagemin": "^6.1.0",
+    "gulp-imagemin": "^7.1.0",
     "gulp-less": "latest",
     "gulp-rename": "latest",
     "gulp-rigger": "^0.5.8",
@@ -33,11 +33,15 @@
     "gulp-svg-symbols": "^3.2.3",
     "gulp-svgmin": "^2.2.0",
     "gulp-uglify": "^3.0.2",
-    "main-bower-files": "^2.13.1",
-    "npm-check-updates": "^3.1.22",
+    "main-bower-files": "^2.13.3",
+    "npm-check-updates": "^4.0.1",
     "smart-grid": "latest"
   },
   "dependencies": {
     "normalize.css": "^8.0.1"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 10 versions"
+  ]
 }
